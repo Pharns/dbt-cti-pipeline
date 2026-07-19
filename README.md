@@ -21,7 +21,9 @@ behavioral-analytics marts (dbt):
 ```
 
 Each model is tested (`not_null`, `unique`, `accepted_values`) and documented; `dbt docs`
-generates the full lineage DAG.
+generates the full lineage DAG:
+
+![dbt lineage DAG: two CTI sources → staging → unioned intermediate → three behavioral-analytics marts](docs/dag.png)
 
 ## Verified run
 
