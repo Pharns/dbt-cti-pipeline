@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: cti
+    schema: raw   # tables live in DuckDB schema `raw` (see load_feeds.py SCHEMA); ref stays source('cti', ...)
+    description: "Raw CTI feeds landed by scripts/load_feeds.py into DuckDB."
+    tables:
+      - name: raw_urlhaus
+        description: "URLhaus recent malicious URLs (abuse.ch)."
+      - name: raw_threatfox
+        description: "ThreatFox recent IOCs (abuse.ch)."
+
+models:
+  - name: stg_urlhaus
+    description: "Cleaned URLhaus IOCs in the common schema."
+    columns:
+      - name: source_id
+        description: "Feed-native record id."
+        tests: [not_null]
+      - name: ioc_value
+        description: "The indicator (URL)."
+        tests: [not_null]
+      - name: ioc_type
+        tests:
+          - accepted_values:
+              values: ['url']
+
+  - name: stg_threatfox
+    description: "Cleaned ThreatFox IOCs in the common schema."
+    columns:
+      - name: source_id
+        tests: [not_null]
+      - name: ioc_value
+        tests: [not_null]
+      - name: source_feed
+        tests:
+          - accepted_values:
+              values: ['threatfox']

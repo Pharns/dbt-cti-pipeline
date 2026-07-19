@@ -1,0 +1,21 @@
+name: 'cti_pipeline'
+version: '1.0.0'
+config-version: 2
+
+profile: 'cti_pipeline'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  cti_pipeline:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

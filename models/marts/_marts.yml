@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: int_iocs_unioned
+    description: "Both CTI feeds unioned into one normalized IOC table (multi-source correlation)."
+    columns:
+      - name: ioc_value
+        tests: [not_null]
+      - name: source_feed
+        tests:
+          - accepted_values:
+              values: ['urlhaus', 'threatfox']
+
+  - name: mart_ioc_by_family
+    description: "Behavioral analytics: IOC volume + time span by threat/malware family."
+    columns:
+      - name: threat_family
+        tests: [not_null]
+      - name: ioc_count
+        tests: [not_null]
+
+  - name: mart_daily_ioc_volume
+    description: "Behavioral analytics: daily IOC volume with 7-day baseline for anomaly detection."
+    columns:
+      - name: day
+        tests: [not_null]
+
+  - name: mart_cross_feed_iocs
+    description: "IOCs corroborated across >1 feed = higher-confidence leads."
+    columns:
+      - name: ioc_value
+        tests: [not_null, unique]
+      - name: feed_count
+        tests: [not_null]

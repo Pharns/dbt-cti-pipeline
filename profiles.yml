@@ -1,0 +1,9 @@
+# dbt profile — local DuckDB. Copy to ~/.dbt/profiles.yml OR keep here and run with
+# `dbt run --profiles-dir .`  (the repo-local approach, cleaner for a portfolio project).
+cti_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: 'cti.duckdb'      # local DuckDB file, created on first run
+      threads: 4
