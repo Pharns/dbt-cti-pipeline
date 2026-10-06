@@ -1,5 +1,7 @@
 # CTI Behavioral-Analytics Pipeline (dbt + DuckDB)
 
+> **Built by Pharns Genece.** Live abuse.ch feeds → dbt (staging → marts) on DuckDB. 6 models · 14/14 tests passing · full lineage DAG. Portfolio: [portfolio.pharns.com](https://portfolio.pharns.com)
+
 A small, self-contained data pipeline that ingests live cyber threat intelligence (CTI)
 feeds, transforms them with **dbt**, and produces **behavioral-analytics tables** for threat
 detection and lead generation — built on **DuckDB** so it runs locally with no cloud setup.
